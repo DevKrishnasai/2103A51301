@@ -46,6 +46,7 @@ app.get(
           params: {
             minPrice,
             maxPrice,
+            top,
           },
         }
       );
@@ -67,12 +68,16 @@ app.get(
         currentPage: parsedPage,
         totalPages: Math.ceil(allProducts.length / parsedTop),
         totalProducts: allProducts.length,
+        message: "Products fetched successfully",
       });
     } catch (error) {
       console.error("Error fetching products:", (error as any)?.response?.data); //just for any error
       res
         .status(500)
-        .json({ error: "Error fetching products from e-commerce API" });
+        .json({
+          error: "Error fetching products from e-commerce API",
+          message: (error as any)?.response?.data.message,
+        });
     }
   }
 );

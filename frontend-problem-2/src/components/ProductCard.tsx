@@ -20,11 +20,6 @@ export default function ProductCard({ product }: ProductCardProps) {
         <CardTitle>{product.name}</CardTitle>
       </CardHeader>
       <CardContent>
-        <img
-          src={product.image}
-          alt={product.name}
-          className="w-full h-48 object-cover"
-        />
         <p>Price: ${product.price}</p>
         <p>Category: {product.category}</p>
         <p>Company: {product.company}</p>
