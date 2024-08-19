@@ -28,7 +28,12 @@ export default function Home() {
       });
       try {
         const data = await fetchProducts({ ...filters, page: currentPage });
-        setProducts(data.products);
+        const products = data.products.map((product: any) => ({
+          ...product,
+          category: filters.category,
+          company: filters.company,
+        }));
+        setProducts(products);
         setTotalPages(data.totalPages);
         toast.success("Products fetched successfully", {
           id: "fetching-products",
@@ -59,7 +64,7 @@ export default function Home() {
               <div className="text-center ">No products found</div>
             </div>
           )}
-          <ProductList products={products} />
+          <ProductList products={products} filters={filters} />
           <Pagination
             currentPage={currentPage}
             totalPages={totalPages}

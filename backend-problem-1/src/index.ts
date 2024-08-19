@@ -72,12 +72,10 @@ app.get(
       });
     } catch (error) {
       console.error("Error fetching products:", (error as any)?.response?.data); //just for any error
-      res
-        .status(500)
-        .json({
-          error: "Error fetching products from e-commerce API",
-          message: (error as any)?.response?.data.message,
-        });
+      res.status(500).json({
+        error: "Error fetching products from e-commerce API",
+        message: (error as any)?.response?.data.message,
+      });
     }
   }
 );
@@ -86,6 +84,7 @@ app.get(
   "/companies/:companyname/categories/:categoryname/products/:productId",
   async (req, res) => {
     const { categoryname, productId, companyname } = req.params;
+    console.log(categoryname, productId, companyname);
     try {
       const response = await axiosProvider.get(
         `${process.env.TEST_SERVER_URL}/companies/${companyname}/categories/${categoryname}/products/${productId}`

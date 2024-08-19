@@ -11,21 +11,32 @@ import { Product } from "@/types/Product";
 
 interface ProductCardProps {
   product: Product;
+  filters: {
+    category: string;
+    company: string;
+    minPrice: number;
+    maxPrice: number;
+    top: number;
+  };
 }
 
-export default function ProductCard({ product }: ProductCardProps) {
+export default function ProductCard({ product, filters }: ProductCardProps) {
   return (
-    <Card>
+    <Card className="hover:shadow-xl">
       <CardHeader>
-        <CardTitle>{product.name}</CardTitle>
+        <CardTitle>{product.productName}</CardTitle>
       </CardHeader>
       <CardContent>
         <p>Price: ${product.price}</p>
         <p>Category: {product.category}</p>
         <p>Company: {product.company}</p>
+        <p>Rating: {product.rating}</p>
+        <p>Discount: {product.discount}%</p>
       </CardContent>
       <CardFooter>
-        <Link href={`/product/${product.id}`}>
+        <Link
+          href={`/product/${product.productName}?company=${filters.company}&category=${filters.category}`}
+        >
           <Button>View Details</Button>
         </Link>
       </CardFooter>
